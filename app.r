@@ -12,12 +12,15 @@ library(leaflet)
 library(dplyr)
 library(tidyr)
 library(mapview)
+library(htmltools)
+library(htmlwidgets)
 #Data
 
 edanR <- readRDS("edanR.rds")
 
 # Define UI for application that draws a histogram
-ui <- fluidPage(
+ui <- fluidPage(theme = "bootstrap.css",
+                 headerPanel("Mappable"),
   leafletOutput("mymap",height = 1000)
 )
   
@@ -28,6 +31,12 @@ server <- function(input,output, session){
   output$mymap <- renderLeaflet({
     m <- leaflet(data = edanR) %>%
       addTiles() %>%
+      addEasyButton(easyButton(
+        icon="fa-globe", title="Zoom to Level 1",
+        onClick=JS("function(btn, map){ map.setZoom(1); }"))) %>%
+      addEasyButton(easyButton(
+        icon="fa-crosshairs", title="Locate Me",
+        onClick=JS("function(btn, map){ map.locate({setView: true}); }")))%>%
       setView(lng=-77.009305, lat=38.885611 , zoom=10)%>%
       addCircleMarkers(~lat, ~lng, color = "Green", radius = 6, fillOpacity= .6, stroke = FALSE, clusterOptions = markerClusterOptions(freezeAtZoom = 18)
       )
