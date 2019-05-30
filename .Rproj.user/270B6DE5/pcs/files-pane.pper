@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
     "path" : "~/R/Mappable/appR/appR",
+=======
+    "path" : "C:/Users/kenyong/OneDrive - Smithsonian Institution/Mappable/R App/www",
+>>>>>>> b22829bc2ee75abc339c270fd99b9dc0bb4f63c5
     "sortOrder" : [
         {
             "ascending" : true,

@@ -17,10 +17,16 @@ library(htmlwidgets)
 #Data
 
 edanR <- readRDS("edanR.rds")
+img <- edanR$IDS_URL
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(theme = "bootstrap.css",
+<<<<<<< HEAD
                  headerPanel("Mappable"),
+=======
+                 titlePanel
+                ("Mappable"),
+>>>>>>> b22829bc2ee75abc339c270fd99b9dc0bb4f63c5
   leafletOutput("mymap",height = 1000)
 )
   
@@ -38,7 +44,8 @@ server <- function(input,output, session){
         icon="fa-crosshairs", title="Locate Me",
         onClick=JS("function(btn, map){ map.locate({setView: true}); }")))%>%
       setView(lng=-77.009305, lat=38.885611 , zoom=10)%>%
-      addCircleMarkers(~lat, ~lng, color = "Green", radius = 6, fillOpacity= .6, stroke = FALSE, clusterOptions = markerClusterOptions(freezeAtZoom = 18)
+      addCircleMarkers(~lat, ~lng, color = "Green", radius = 6, fillOpacity= .6, stroke = FALSE, clusterOptions = markerClusterOptions(freezeAtZoom = 18),
+                       popup = popupImage(img, src="remote")
       )
 m
   })
